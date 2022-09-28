@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Input } from "antd";
+import { Alert } from "antd";
 import { AudioOutlined } from "@ant-design/icons";
 import { getAllGistsURL, getGistURL } from "../API_config/api_config";
+import Results from "./Results";
 
 const { Search } = Input;
 const suffix = (
@@ -47,9 +49,27 @@ function SearchBar() {
         onSearch={onSearch}
       />
 
-      {username !== "" && data && !error ? (<p>SUCCESS</p>) : null}
-      {username && data.length === 0 ? (<p>ERROR: No data found!</p>) : null}
-      {username === "" ? (<p>ERROR: Empty username!</p>) : null}
+      {username !== "" && data && !error ? (<Results data={data} username={username} />) : null}
+     
+      {username && data.length === 0 ? (
+        <Alert
+          message="Error"
+          description="No data found"
+          type="error"
+          showIcon
+          style={{ marginTop: 10 }}
+        />
+      ) : null}
+
+      {username === '' ? (
+        <Alert
+          message="Error"
+          description="Empty Username!"
+          type="error"
+          showIcon
+          style={{ marginTop: 10 }}
+        />
+      ) : null}
     </>
   );
 }

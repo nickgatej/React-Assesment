@@ -26,7 +26,7 @@ function Cards(props) {
   //     "size": 175
   //   }
   // },
-  
+
   const noOfFiles = Object.keys(files).length;
 
   const [data, setData] = useState([]);
@@ -38,7 +38,7 @@ function Cards(props) {
         const URL = getGistURL(value);
         const res = await fetch(URL);
         const data = await res.json();
-        setData(data); 
+        setData(data);
         setShow(true);
       } catch (e) {
         console.log(e);
@@ -49,7 +49,6 @@ function Cards(props) {
 
   return (
     <div className="site-card-wrapper">
-      {/* card e imported */}
       <Card
         title={unidata.description || "No Description"}
         bordered={false}
@@ -59,13 +58,10 @@ function Cards(props) {
           </Button>
         }
       >
-
-        {/* 1 File */}
         <p className="numberFiles">
           {noOfFiles} {noOfFiles > 1 ? "Files" : "File"}
         </p>
 
-        {/* ruby in chenar */}
         <div>
           {fileArray.map((language, index) => {
             return (
@@ -76,14 +72,13 @@ function Cards(props) {
           })}
         </div>
 
-          
         <File filelist={files} />
-        
+
         {show && data !== [] ? <Forks forks={data} /> : null}
       </Card>
-      <Divider dashed/>
+      <Divider dashed />
     </div>
   );
-};
+}
 
 export default Cards;
